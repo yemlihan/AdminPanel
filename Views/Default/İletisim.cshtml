@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewBag.Title = "İletişim";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section id="contact">
+    <div class="container">
+        <div class="well well-sm mt-5">
+            <h3 style="color:wheat"><strong>Neredeyiz?</strong></h3>
+        </div>
+
+        <div class="row">
+            <div class="col-md-7 mt-2">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d3736489.7218514383!2d90.21589792292741!3d23.857125486636733!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sbd!4v1506502314230" width="600" height="355" frameborder="0" style="border:0" allowfullscreen></iframe>
+            </div>
+
+            <div class="col-md-5">
+                <h4 style="color:wheat"><strong>İletişime Geç</strong></h4>
+                @using (Html.BeginForm("IletisimForm", "Default", FormMethod.Post))
+                {
+                    <div class="input-group ">
+                        <div class="input-group-append">
+                            <input type="text" placeholder="Adınız" name="ad" style="border-radius:5px 5px;height:40px; width:350px" required />
+                        </div>
+                    </div>
+                    <div class="input-group mt-3">
+                        <div class="input-group-append">
+                            <input type="email" placeholder="EMail Adresiniz" style="border-radius:5px 5px;height:40px; width:350px" name="mail" required />
+                        </div>
+                    </div>
+                    <div class="input-group mt-3">
+                        <div class="input-group-append">
+                            <input type="text" placeholder="Konu" style="border-radius:5px 5px;height:40px; width:350px" name="konu" required />
+                        </div>
+                    </div>
+                    <div class="input-group mt-3">
+                        <div class="input-group-append">
+                            <textarea placeholder="Mesajınız" style="width:350px;height:100px" name="mesaj" required></textarea>
+                        </div>
+                    </div>
+                    <div class="input-group mt-3 mb-3">
+                        <div class="input-group-append">
+                            <input type="submit" value="GÖNDER" class="btn btn-primary" />
+                        </div>
+                    </div>
+                }
+
+
+            </div>
+        </div>
+    </div>
+</section>
+

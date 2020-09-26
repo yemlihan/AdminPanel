@@ -1,0 +1,148 @@
+﻿@model List<AdminPanel.Models.kullanicilar>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@if (TempData["kullanici"] != null)
+{
+    <link href="~/Content/admin/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css" rel="stylesheet" />
+    <script src="~/Content/admin/plugins/sweetalert2/sweetalert2.min.js"></script>
+
+    <script>
+        Swal.fire("Başarılı", "@TempData["kullanici"]", 'success');
+    </script>
+}
+
+
+<div class="content-wrapper">
+   
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Kullanıcılar Sayfası</h1>
+                </div>
+                <div class="col-sm-6">
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section class="content">
+        <div class="row">
+            <div class="col-12">
+
+
+
+                <div class="card">
+                    <div class="card-header">
+                        @Html.ActionLink("Yeni Kullanıcı Ekle", "Yeni", null, new { @class = "btn btn-primary mx-4" })
+                    </div>
+                    
+                    <div class="card-body">
+
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Kullanıcı Adı</th>
+                                    <th>Yetki</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var kullanici in Model)
+                                {
+
+
+                                    <tr>
+                                        
+                                        <td>
+                                            @kullanici.kad
+                                        </td>
+                                        <td>@kullanici.role</td>
+                                      
+                                        
+                                        <td>
+                                            @Html.ActionLink("Güncelle", "Guncelle", new { kullanici.id }, new { @class = "btn btn-info mx-4" })
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#sil_@kullanici.id">
+                                                Sil
+                                            </button>
+
+                                           
+                                            <div class="modal fade" id="sil_@kullanici.id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Sil</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">×</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <h4>Kullanıcıyı Silmek İstiyor Musunuz?</h4>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Vazgeç</button>
+                                                            @Html.ActionLink("Sil", "Sil", new { kullanici.id }, new { @class = "btn btn-danger" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Kullanıcı Adı</th>
+                                    <th>Yetki</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                  
+                </div>
+              
+            </div>
+           
+        </div>
+        
+    </section>
+   
+</div>
+
+
+@section altTaraf
+{
+    
+    <script src="~/Content/admin/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Content/admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/Content/admin/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/Content/admin/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script>
+        $(function () {
+            $("#example1").DataTable({
+                "responsive": true,
+                "autoWidth": false,
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Turkish.json"
+                }
+            });
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+    </script>
+}
+

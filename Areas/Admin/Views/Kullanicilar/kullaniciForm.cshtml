@@ -1,0 +1,75 @@
+﻿@model AdminPanel.Models.kullanicilar
+@{
+    ViewBag.Title = "kullaniciForm";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<style>
+    .field-validation-error {
+        color: red;
+    }
+</style>
+
+<div class="content-wrapper">
+    <div class="container">
+        <h2>Kullanıcı Form Sayfası</h2>
+        @using (Html.BeginForm("Kaydet", "Kullanicilar", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            <table class="table table-hover bg-white">
+               
+                <tr>
+                    <td>
+                       Kullanıcı Adı
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(m => m.kad, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.kad)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                       Şifre
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(m => m.sifre, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.sifre)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                       Yetki
+                    </td>
+                    <td>
+                        @Html.TextAreaFor(m => m.role, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.role)
+                    </td>
+                </tr>
+               
+                <tr>
+                    <td></td>
+                    <td>
+                        @Html.HiddenFor(m => m.kad)
+                        @Html.HiddenFor(m => m.id)
+                        <input type="submit" value="Kaydet" class="btn btn-primary" />
+                    </td>
+                </tr>
+            </table>
+        }
+    </div>
+</div>
+@section altTaraf{
+    
+    <link rel="stylesheet" href="~/Content/admin/plugins/summernote/summernote-bs4.css">
+
+    
+    <script src="~/Content/admin/plugins/summernote/summernote-bs4.min.js"></script>
+    <script>
+        $(function () {
+           
+            $('#icerik').summernote()
+        })
+    </script>
+}
+
+

@@ -1,0 +1,111 @@
+﻿@model AdminPanel.Models.kullanicilar
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Admin Paneli</title>
+   
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <link rel="stylesheet" href="~/Content/admin/plugins/fontawesome-free/css/all.min.css">
+   
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    
+    <link rel="stylesheet" href="~/Content/admin/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    
+    <link rel="stylesheet" href="~/Content/admin/dist/css/adminlte.min.css">
+    
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <style>
+        .field-validation-error {
+            color: red;
+        }
+    </style>
+
+</head>
+<body class="hold-transition login-page">
+    <div class="login-box">
+        <div class="login-logo">
+            <a href="@Url.Action("Index","Login")"><b>Admin</b>LTE</a>
+        </div>
+        
+        <div class="card">
+            <div class="card-body login-card-body">
+                <p class="login-box-msg">Oturum Aç</p>
+
+                @using (Html.BeginForm("Alogin", "Login", new { ReturnUrl = Request.QueryString["ReturnUrl"], FormMethod.Post }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="input-group mb-3">
+
+                        @Html.TextBoxFor(m => m.kad, new { @class = "form-control", placeholder = "Kullanıcı Adı", autofocus = "autofocus" })
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                    </div>
+                    @Html.ValidationMessageFor(m => m.kad)
+
+                    <div class="input-group mb-3">
+
+                        @Html.PasswordFor(m => m.sifre, new { @class = "form-control", placeholder = "Şifre" })
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    @Html.ValidationMessageFor(m => m.sifre)
+
+                    <div class="row">
+                        <div class="col-8">
+
+
+                            <label class="ml-1 mt-1">
+                                @Html.CheckBoxFor(m => m.BeniHatirla)
+                                Beni Hatırla
+                            </label>
+
+                        </div>
+                       
+                        <div class="col-4">
+                            <button type="submit" class="btn btn-primary btn-block">Giriş</button>
+                        </div>
+                       
+                    </div>
+                }
+
+                @if (ViewBag.Hata != null)
+                {
+                    <div class="alert alert-danger mt-4">
+                        @ViewBag.Hata
+                    </div>
+                }
+
+
+                
+
+            </div>
+           
+        </div>
+    </div>
+   
+    <script src="~/Content/admin/plugins/jquery/jquery.min.js"></script>
+    
+    <script src="~/Content/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+   
+    <script src="~/Content/admin/dist/js/adminlte.min.js"></script>
+
+</body>
+</html>
+
+
+

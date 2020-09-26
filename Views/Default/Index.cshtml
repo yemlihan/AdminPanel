@@ -1,0 +1,48 @@
+﻿@model List<AdminPanel.Models.anasayfa>
+@{
+    ViewBag.Title = "Anasayfa";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<section class="page-section clearfix">
+    <div class="container">
+        <div class="intro">
+            @foreach (var home in Model)
+            {
+
+
+            <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="~/Content/img/@home.foto" alt="">
+            <div class="intro-text left-0 text-center bg-faded p-5 rounded">
+                <h2 class="section-heading mb-4">
+                    <span class="section-heading-upper">@home.ustbaslik</span>
+                    <span class="section-heading-lower">@home.baslik</span>
+                </h2>
+                <p class="mb-3">
+                   @home.icerik
+                </p>
+                <div class="intro-button mx-auto">
+                    @Html.ActionLink("DETAY", "YeniSayfa", new { home.id }, new { @class="btn btn-info mx-4"})
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+</section>
+
+<section class="page-section cta">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-9 mx-auto">
+                <div class="cta-inner text-center rounded">
+                    <h2 class="section-heading mb-4">
+                        <span class="section-heading-upper">Teşekkürler</span>
+                        <span class="section-heading-lower">Ziyaretiniz İçin...</span>
+                    </h2>
+                    <p class="mb-0">Müşterileriniz için harika tasarım ve kullanım için SatSat E-Ticaret sitesi </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

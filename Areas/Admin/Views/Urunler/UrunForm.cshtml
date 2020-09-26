@@ -1,0 +1,104 @@
+﻿@model AdminPanel.Models.urunler
+@{
+    ViewBag.Title = "Ürünler";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<style>
+    .field-validation-error {
+        color: red;
+    }
+</style>
+
+<div class="content-wrapper">
+    <div class="container">
+        <h2>Ürünler Form Sayfası</h2>
+        @using (Html.BeginForm("Kaydet", "Urunler", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            <table class="table table-hover bg-white">
+                <tr>
+                    <td>
+                        Foto
+                    </td>
+                    <td>
+                        @if (Model.foto != null)
+                        {
+                            <img src="~/Content/img/@Model.foto" width="250" />
+                        }
+                        @Html.TextBoxFor(m => m.fotoFile, new { type = "file" })
+                        @if (ViewBag.HataFoto != null)
+                        {
+                            <span class="field-validation-error" data-valmsg-for="fotoFile" data-valmsg-replace="true">@ViewBag.HataFoto</span>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Üst Başlık
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(m => m.ustbaslik, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.ustbaslik)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Başlık
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(m => m.baslik, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.baslik)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        İçerik
+                    </td>
+                    <td>
+                        @Html.TextAreaFor(m => m.icerik, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.icerik)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Sıra
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(m => m.sira, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.sira)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Aktif/Pasif
+                    </td>
+                    <td>
+                        <label> @Html.CheckBoxFor(m => m.aktif) Aktif Mi?</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        @Html.HiddenFor(m => m.foto)
+                        @Html.HiddenFor(m => m.id)
+                        <input type="submit" value="Kaydet" class="btn btn-primary" />
+                    </td>
+                </tr>
+            </table>
+        }
+    </div>
+</div>
+@section altTaraf{
+    <!-- summernote -->
+    <link rel="stylesheet" href="~/Content/admin/plugins/summernote/summernote-bs4.css">
+
+    <!-- Summernote -->
+    <script src="~/Content/admin/plugins/summernote/summernote-bs4.min.js"></script>
+    <script>
+        $(function () {
+            // Summernote
+            $('#icerik').summernote()
+        })
+    </script>
+}
